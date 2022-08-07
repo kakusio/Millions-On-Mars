@@ -1,5 +1,5 @@
 module.exports = {
-  pathPrefix: "/MoM",
+  pathPrefix: "/Millions-On-Mars",
   siteMetadata: {
     siteUrl: "https://kakusio.github.io",
   },
