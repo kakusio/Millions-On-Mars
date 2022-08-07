@@ -5,17 +5,15 @@ import TASKS from "../../fakedb/tasks";
 import BUILDINGTASK from "../../fakedb/buildingTask";
 
 const Tasks = (props) => {
-  const {
-    location: { href },
-  } = props;
-  const url = new URL(href);
-  const building = url.searchParams.get("building");
   let tasks = TASKS;
-
-  if (building) {
-    tasks = BUILDINGTASK.filter((bt) => bt.Building.Name === building).map(
-      (bt) => bt.Task
-    );
+  if (typeof window !== "undefined") {
+    const url = new URL(window.location.href);
+    const building = url.searchParams.get("building");
+    if (building) {
+      tasks = BUILDINGTASK.filter((bt) => bt.Building.Name === building).map(
+        (bt) => bt.Task
+      );
+    }
   }
 
   return (

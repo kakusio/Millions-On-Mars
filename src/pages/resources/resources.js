@@ -4,18 +4,16 @@ import PageWrapper from "../../component/pageWrapper";
 import RESOURCES from "../../fakedb/resources";
 import TASKRESOURCE from "../../fakedb/taskResource";
 
-const Resources = (props) => {
-  const {
-    location: { href },
-  } = props;
-  const url = new URL(href);
-  const task = url.searchParams.get("task");
+const Resources = () => {
   let resources = RESOURCES;
-
-  if (task) {
-    resources = TASKRESOURCE.filter((tr) => {
-      return tr.Task.Name === task;
-    }).map((bt) => bt.Resource);
+  if (typeof window !== "undefined") {
+    const url = new URL(window.location.href);
+    const task = url.searchParams.get("task");
+    if (task) {
+      resources = TASKRESOURCE.filter((tr) => {
+        return tr.Task.Name === task;
+      }).map((bt) => bt.Resource);
+    }
   }
 
   return <PageWrapper Title="Resources" Items={resources} />;

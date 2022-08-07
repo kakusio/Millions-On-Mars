@@ -1,10 +1,10 @@
 import * as React from "react";
-import Link from 'gatsby-link';
+import { Link } from "gatsby"
 
 const pageWrapper = ({ Title, Items, TargetLink }) => {
   const onClick = (e) => {
     e.preventDefault();
-    window.history.back();
+    if (typeof window !== "undefined") window.history.back();
   };
 
   return (
@@ -24,9 +24,9 @@ const pageWrapper = ({ Title, Items, TargetLink }) => {
           <li>
             <span>{Items[key].Name}</span> --{" "}
             {TargetLink && (
-              <a href={`${TargetLink}${Items[key].Name}`}>
+              <Link to={`${TargetLink}${Items[key].Name}`}>
                 {TargetLink.split("?")[0]}
-              </a>
+              </Link>
             )}
           </li>
         ))}

@@ -1,9 +1,9 @@
 import * as React from "react";
-import Link from 'gatsby-link';
+import { Link } from "gatsby";
 
 const IndexPage = () => {
   return (
-    <main className={styles.pageStyles}>
+    <main>
       <h1>
         Million On Mars
         <br />
