@@ -1,12 +1,11 @@
 import * as React from "react";
-import { Link } from "gatsby"
+import { Link } from "gatsby";
 
 const pageWrapper = ({ Title, Items, TargetLink }) => {
   const onClick = (e) => {
     e.preventDefault();
     if (typeof window !== "undefined") window.history.back();
   };
-
   return (
     <main>
       <h1>
@@ -21,12 +20,10 @@ const pageWrapper = ({ Title, Items, TargetLink }) => {
       </p>
       <ul>
         {Object.keys(Items).map((key) => (
-          <li>
-            <span>{Items[key].Name}</span> --{" "}
+          <li key={key}>
+            <span>{Items[key].display_name}</span> --{" "}
             {TargetLink && (
-              <Link to={`${TargetLink}${Items[key].Name}`}>
-                {TargetLink.split("?")[0]}
-              </Link>
+              <Link to={`${TargetLink}${key}`}>{TargetLink.split("?")[0]}</Link>
             )}
           </li>
         ))}

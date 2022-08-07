@@ -4,7 +4,6 @@ import PageWrapper from "../../component/pageWrapper";
 import BUILDINGS from "../../fakedb/buildings";
 
 const IndexPage = () => {
-  console.log(BUILDINGS);
   return (
     <PageWrapper
       Title="Buildings"
