@@ -1,40 +1,35 @@
  name: GH Pages deploy
+ 
+ on:
+  push:
+    branches: main
+    paths-ignore:
+      - "**.md"
+      
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
 
-  on:
-    push:
-      branches: main
-      paths-ignore:
-        - "**.md"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+        persist-credentials: false
 
-    pull_request:
-      branches: main
-      paths-ignore:
-        - "**.md"
+      - name: Install
+        run: yarn install
 
-  jobs:
-    build-deploy:
-      runs-on: ubuntu-latest
+      - name: Lint
+        run: yarn lint:check
 
-      steps:
-        - name: Checkout 🛎️
-          uses: actions/checkout@v2
-          with:
-            persist-credentials: false
+      - name: Build
+        run: yarn build
+        env:
+        NODE_ENV: production
 
-        - name: Install 🔧
-          run: yarn install
-
-        - name: Lint 🧐
-          run: yarn lint:check
-
-        - name: Build 🏗️
-          run: yarn build
-          env:
-            NODE_ENV: production
-
-        - name: Deploy to GH Pages 🚀
-          if: ${{ github.event_name != 'pull_request' }}
-          uses: peaceiris/actions-gh-pages@v3
-          with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: dist
+      - name: Deploy to GH Pages
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist
