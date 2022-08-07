@@ -1,13 +1,13 @@
  name: GH Pages deploy
- 
+
  on:
   push:
     branches: main
     paths-ignore:
       - "**.md"
-      
+
 jobs:
-  build-deploy:
+  build-gh-page:
     runs-on: ubuntu-latest
 
     steps:
