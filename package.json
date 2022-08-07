@@ -15,15 +15,19 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "predeploy": "gatsby build",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public -r https://$GH_TOKEN@github.com/kakusio/Millions-On-Mars.git"
-  }
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public -m 'Auto-generated commit'",
+    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "gatsby": "^4.20.0",
+    "gatsby-link": "^1.6.22",
+    "gatsby-plugin-react-helmet": "^1.0.8",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
   },
   "devDependencies": {
-    "gh-pages": "^4.0.0"
+    "gh-pages": "^4.0.0",
+    "prettier": "^1.7.4"
   }
 }

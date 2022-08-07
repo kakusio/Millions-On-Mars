@@ -1,4 +1,5 @@
 import * as React from "react";
+import Link from 'gatsby-link';
 
 const IndexPage = () => {
   return (
@@ -11,13 +12,13 @@ const IndexPage = () => {
       <p>Lets see how far I get on this app</p>
       <ul>
         <li>
-          <a href="/buildings">Building List</a>
+          <Link to="/buildings">Building List</Link>
         </li>
         <li>
-          <a href="/tasks">Tasks List</a>
+          <Link to="/tasks">Tasks List</Link>
         </li>
         <li>
-          <a href="/resources">Resources List</a>
+          <Link to="/resources">Resources List</Link>
         </li>
       </ul>
     </main>

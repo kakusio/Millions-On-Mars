@@ -1,4 +1,5 @@
 import * as React from "react";
+import Link from 'gatsby-link';
 
 const pageWrapper = ({ Title, Items, TargetLink }) => {
   const onClick = (e) => {
@@ -13,7 +14,7 @@ const pageWrapper = ({ Title, Items, TargetLink }) => {
         <br />
       </h1>
       <p>
-        <a href="/">GO Home Page</a>
+        <Link to="/">GO Home Page</Link>
       </p>
       <p>
         <button onClick={onClick}>Go Back</button>
