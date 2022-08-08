@@ -11,4 +11,28 @@ const resourcesByTaskOutput = (taskKey) => {
   });
   return filteredTasks;
 };
-export { resourcesByTaskOutput };
+
+const taskByResourcesInput = (resourceKey) => {
+  let filteredTasks = {};
+
+  Object.keys(TASKS).forEach((taskKey) => {
+    if (TASKS[taskKey].input[resourceKey])
+      filteredTasks[taskKey] = TASKS[taskKey] || {
+        display_name: `MISSING key "${resourceKey}"`,
+      };
+  });
+  return filteredTasks;
+};
+
+const taskByResourcesOutput = (resourceKey) => {
+  let filteredTasks = {};
+
+  Object.keys(TASKS).forEach((taskKey) => {
+    if (TASKS[taskKey].output[resourceKey])
+      filteredTasks[taskKey] = TASKS[taskKey] || {
+        display_name: `MISSING key "${resourceKey}"`,
+      };
+  });
+  return filteredTasks;
+};
+export { resourcesByTaskOutput, taskByResourcesInput, taskByResourcesOutput };

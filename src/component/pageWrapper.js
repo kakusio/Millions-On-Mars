@@ -1,34 +1,97 @@
 import * as React from "react";
 import { Link } from "gatsby";
 
-const pageWrapper = ({ Title, Items, TargetLink }) => {
-  const onClick = (e) => {
-    e.preventDefault();
-    if (typeof window !== "undefined") window.history.back();
-  };
+import {
+  DesktopOutlined,
+  FileOutlined,
+  PieChartOutlined,
+  TeamOutlined,
+} from "@ant-design/icons";
+import { Layout, Menu, Typography, List } from "antd";
+
+import "antd/dist/antd.css";
+
+const { Header, Content, Footer, Sider } = Layout;
+const { Title } = Typography;
+
+const menu = [
+  {
+    label: <Link to="/buildings">Building List</Link>,
+    key: "1",
+    icon: <DesktopOutlined />,
+  },
+  {
+    label: <Link to="/tasks">Tasks List</Link>,
+    key: "2",
+    icon: <FileOutlined />,
+  },
+  {
+    label: <Link to="/resources">Resources List</Link>,
+    key: "3",
+    icon: <PieChartOutlined />,
+  },
+  {
+    label: <Link to="/">GO Home Page</Link>,
+    key: "4",
+    icon: <TeamOutlined />,
+  },
+];
+
+const pageWrapper = ({ title, subTitle, items, getDescription, children }) => {
+  const data =
+    items &&
+    Object.keys(items).map((key) => {
+      return {
+        title: items[key].display_name,
+        key: key,
+        description: getDescription({ key, items }),
+      };
+    });
   return (
-    <main>
-      <h1>
-        {Title}
-        <br />
-      </h1>
-      <p>
-        <Link to="/">GO Home Page</Link>
-      </p>
-      <p>
-        <button onClick={onClick}>Go Back</button>
-      </p>
-      <ul>
-        {Object.keys(Items).map((key) => (
-          <li key={key}>
-            <span>{Items[key].display_name}</span> --{" "}
-            {TargetLink && (
-              <Link to={`${TargetLink}${key}`}>{TargetLink.split("?")[0]}</Link>
+    <Layout style={{ minHeight: "100vh" }}>
+      <Sider>
+        <div className="logo" />
+        <Menu
+          theme="dark"
+          defaultSelectedKeys={["1"]}
+          mode="inline"
+          items={menu}
+        />
+      </Sider>
+      <Layout className="site-layout">
+        <Header className="site-layout-background" style={{ padding: 0 }}>
+          <Title style={{ color: "white", paddingLeft: "48px" }}>{title}</Title>
+        </Header>
+        <Content style={{ margin: "0 16px" }}>
+          <div
+            className="site-layout-background"
+            style={{ padding: 24, minHeight: 360 }}
+          >
+            {subTitle && (
+              <Title level={2} style={{ paddingLeft: "48px" }}>
+                {subTitle}
+              </Title>
             )}
-          </li>
-        ))}
-      </ul>
-    </main>
+            {children}
+            <List
+              itemLayout="horizontal"
+              dataSource={data}
+              renderItem={(item) => (
+                <List.Item>
+                  <List.Item.Meta
+                    title={<span>{item.title}</span>}
+                    description={item.description}
+                  />
+                </List.Item>
+              )}
+            />
+          </div>
+        </Content>
+        <Footer style={{ textAlign: "center" }}>
+          This game is so complicated that I had to do an app
+        </Footer>
+      </Layout>
+    </Layout>
   );
 };
 

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "gatsby";
 
 import PageWrapper from "../../component/pageWrapper";
 import BUILDINGS from "../../fakedb/buildings";
@@ -6,9 +7,11 @@ import BUILDINGS from "../../fakedb/buildings";
 const IndexPage = () => {
   return (
     <PageWrapper
-      Title="Buildings"
-      Items={BUILDINGS}
-      TargetLink={"/tasks?building="}
+      title="Buildings"
+      items={BUILDINGS}
+      getDescription={({ key }) => (
+        <Link to={`/tasks?building=${key}`}>Tasks By Building</Link>
+      )}
     />
   );
 };
